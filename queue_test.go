@@ -28,7 +28,23 @@ func TestPoll(t *testing.T) {
 	actual := q.Poll()
 
 	if actual != 9 {
-		t.Errorf("expected 16, actual is %d \n", actual)
+		t.Errorf("expected 9, actual is %d \n", actual)
+	}
+}
+
+func TestEmpty(t *testing.T) {
+	q := queue.New()
+
+	if q.Poll() != nil {
+		t.Error("expected return nil for polling empty queue")
+	}
+
+	if q.Peek() != nil {
+		t.Error("expected return nil for peeking empty queue")
+	}
+
+	if q.Contains(10) {
+		t.Error("expected always return false for empty queue")
 	}
 }
 

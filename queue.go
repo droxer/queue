@@ -35,6 +35,10 @@ func (s *simple) Poll() interface{} {
 	s.Lock()
 	defer s.Unlock()
 
+	if s.list.Len() == 0 {
+		return nil
+	}
+
 	item := s.list.Back()
 	return s.list.Remove(item)
 }
@@ -49,6 +53,10 @@ func (s *simple) Contains(item interface{}) bool {
 }
 
 func (s *simple) Peek() interface{} {
+	if s.list.Len() == 0 {
+		return nil
+	}
+
 	return s.list.Front().Value
 }
 
